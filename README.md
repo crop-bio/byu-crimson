@@ -39,17 +39,59 @@ the Amiga app launcher expects those commands on-device.
 ## Bootstrap
 
 1. Clone this repository.
-2. Create or restore the Python environment used by `farm-ng-amiga`.
-3. Install the Python dependencies needed by the top-level apps.
-4. If you need live hardware workflows, provide the same external services and
+2. Create the expected local virtual environment with:
+
+   ```bash
+   ./scripts/bootstrap_local_dev.sh
+   ```
+
+3. If you need live camera access on a compatible machine, also try:
+
+   ```bash
+   ./scripts/bootstrap_local_dev.sh --with-live-hardware
+   ```
+
+4. Launch the apps with the wrapper scripts under `scripts/`.
+5. If you need live hardware workflows, provide the same external services and
    devices that the Amiga has available.
 
-The current app wrappers expect the farm-ng Amiga virtual environment at:
+The app wrappers expect the farm-ng Amiga virtual environment at:
 
 `farm-ng-amiga/BYU_Amiga/amiga-env`
 
-For local-only work, use `CRIMSON_ROOT` and create a compatible environment in
-that same relative location.
+The bootstrap script creates that environment in the expected location so the
+launchers can find it automatically. You can also override the interpreter with
+`CRIMSON_PYTHON=/path/to/python`.
+
+## Local App Modes
+
+For quick UI work on a laptop:
+
+- `scripts/run_hangman_app.sh` works with only the standard library.
+- `scripts/run_full_service_app.sh` works locally, but its runner controls still
+  expect a working `systemd --user` session and the Amiga service stack.
+- `scripts/run_full_calibration_app.sh` can show the calibration UI and curated
+  sample reports immediately. Checkerboard capture and calibration actions need
+  the bootstrap environment because they use `numpy` and `opencv-python`.
+
+For camera-backed local development:
+
+- RealSense features need `pyrealsense2`.
+- OAK / farm-ng features need the editable `farm-ng-amiga` package and any
+  reachable farm-ng services described by the JSON configs.
+- Full Service capture still expects the same privileges, devices, and external
+  services that the Amiga workflow uses.
+
+## Contributor Workflow
+
+Do not work directly on `main`. Create a feature branch first:
+
+```bash
+git checkout -b your-branch-name
+```
+
+Then make your changes, push the branch, and open a pull request back into
+`main`.
 
 ## Script Roles
 

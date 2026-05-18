@@ -1,0 +1,5 @@
+# Base local-machine dependencies for the top-level BYU Crimson apps.
+# Install these into farm-ng-amiga/BYU_Amiga/amiga-env via
+# scripts/bootstrap_local_dev.sh.
+numpy>=1.26,<3
+opencv-python>=4.10,<5

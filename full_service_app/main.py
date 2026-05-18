@@ -25,6 +25,10 @@ FULL_SERVICE_PATH = ROOT_DIR / "farm-ng-amiga" / "BYU_Amiga" / "field2025" / "fu
 FULL_SERVICE_VENV_PYTHON = ROOT_DIR / "farm-ng-amiga" / "BYU_Amiga" / "amiga-env" / "bin" / "python"
 TEST_SCRIPT_PATH = ROOT_DIR / "scripts" / "test_script.sh"
 DEFAULT_SAVE_ROOT = Path("/media/adminfarmng/CROPBIO2/current")
+LOCAL_LOG_PATH_CANDIDATES = [
+    ROOT_DIR / "farmng_log.log",
+    ROOT_DIR / "farm_ng_log.log",
+]
 STOP_WAIT_SECONDS = 16.0
 IMAGE_CACHE_TTL_SECONDS = 2.0
 LATEST_IMAGE_CACHE: dict[str, Any] = {
@@ -336,17 +340,18 @@ HTML = """<!doctype html>
 
     function applyStatus(data) {
       statusValue.textContent = data.active_state;
-      statusMeta.textContent = data.sub_state + " | " + data.unit_file_state;
+      statusMeta.textContent = data.status_note || (data.sub_state + " | " + data.unit_file_state);
 
       if (controlsBusy) {
         return;
       }
 
       const active = data.active_state === "active" || data.active_state === "activating";
-      startButton.disabled = active;
-      pauseButton.disabled = !active;
-      resumeButton.disabled = !active;
-      stopButton.disabled = !active;
+      const controlsAvailable = data.management_mode !== "unavailable";
+      startButton.disabled = !controlsAvailable || active;
+      pauseButton.disabled = !controlsAvailable || !active;
+      resumeButton.disabled = !controlsAvailable || !active;
+      stopButton.disabled = !controlsAvailable || !active;
       rsTestButton.disabled = active;
       mountButton.disabled = false;
     }
@@ -469,6 +474,21 @@ def _run_sudo_command_bytes(args: list[str]) -> subprocess.CompletedProcess[byte
     return _run_command_bytes(["sudo", "-n", *args])
 
 
+def _tail_text(path: Path, max_lines: int) -> str:
+    try:
+        lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+    except OSError:
+        return ""
+    return "\n".join(lines[-max_lines:])
+
+
+def get_local_log_path() -> Path | None:
+    for path in LOCAL_LOG_PATH_CANDIDATES:
+        if path.exists():
+            return path
+    return None
+
+
 def get_service_status() -> dict[str, str]:
     result = _run_command(
         [
@@ -482,6 +502,15 @@ def get_service_status() -> dict[str, str]:
             "--value",
         ]
     )
+    if result.returncode != 0:
+        return {
+            "active_state": "local-dev",
+            "sub_state": "controls unavailable",
+            "unit_file_state": "no user systemd",
+            "management_mode": "unavailable",
+            "status_note": "Runner controls need a working systemd --user session on an Amiga-like host.",
+        }
+
     lines = result.stdout.strip().splitlines()
     while len(lines) < 3:
         lines.append("unknown")
@@ -489,6 +518,8 @@ def get_service_status() -> dict[str, str]:
         "active_state": lines[0] or "unknown",
         "sub_state": lines[1] or "unknown",
         "unit_file_state": lines[2] or "unknown",
+        "management_mode": "systemd-user",
+        "status_note": "",
     }
 
 
@@ -509,7 +540,18 @@ def get_service_logs() -> str:
         ]
     )
     output = result.stdout.strip()
-    return output if output else "No logs yet."
+    if output:
+        return output
+
+    local_log_path = get_local_log_path()
+    if local_log_path is not None:
+        local_output = _tail_text(local_log_path, LOG_LINES)
+        if local_output:
+            return local_output
+
+    if result.returncode != 0:
+        return "No logs yet. Journal access is unavailable on this machine."
+    return "No logs yet."
 
 
 def _read_text(path: Path) -> str:

@@ -5,6 +5,7 @@ import argparse
 import asyncio
 from collections import deque
 from datetime import datetime, timezone
+import importlib.util
 import json
 import math
 import os
@@ -16,8 +17,20 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
 from urllib.parse import urlparse
 
-import cv2
-import numpy as np
+CV2_IMPORT_ERROR: ModuleNotFoundError | None = None
+NUMPY_IMPORT_ERROR: ModuleNotFoundError | None = None
+
+try:
+    import cv2
+except ModuleNotFoundError as exc:
+    cv2 = None  # type: ignore[assignment]
+    CV2_IMPORT_ERROR = exc
+
+try:
+    import numpy as np
+except ModuleNotFoundError as exc:
+    np = None  # type: ignore[assignment]
+    NUMPY_IMPORT_ERROR = exc
 
 
 APP_SERVICE = "full-calibration.service"
@@ -555,13 +568,17 @@ HTML = """<!doctype html>
         const latestLine = latest.created_at
           ? `Latest sample result: ${latest.solved_count}/${latest.capture_count} solved, ${latest.error_count} capture errors`
           : "Latest sample result: none";
+        const notes = (data.notes || []).length
+          ? `\\nNotes:\\n- ${(data.notes || []).join("\\n- ")}`
+          : "";
         status.textContent =
           `Output: ${data.output_dir}\\n` +
           `Latest intrinsics: ${data.latest_intrinsics || "none"}\\n` +
           `Latest sample: ${data.latest_sample || "none"}\\n` +
           `Latest stitched: ${data.latest_stitched || "none"}\\n` +
           `Latest robot frame: ${data.latest_robot_frame || "none"}\\n` +
-          latestLine;
+          latestLine +
+          notes;
         renderCameraStatus(data.camera_status || []);
         populateCameraSelect("root-camera", data.camera_status || [], "Auto select");
         populateCameraSelect("anchor-camera", data.camera_status || [], "Select camera");
@@ -623,6 +640,33 @@ HTML = """<!doctype html>
 
 def utc_stamp() -> str:
     return datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S_%fZ")
+
+
+def require_calibration_runtime() -> None:
+    missing = []
+    if NUMPY_IMPORT_ERROR is not None:
+        missing.append("numpy")
+    if CV2_IMPORT_ERROR is not None:
+        missing.append("opencv-python")
+    if missing:
+        raise RuntimeError(
+            "This action needs "
+            + ", ".join(missing)
+            + ". Run scripts/bootstrap_local_dev.sh and relaunch the app."
+        )
+
+
+def local_status_notes() -> list[str]:
+    notes = [
+        "Curated sample calibration data is available under sample_data/calibration for UI inspection on a laptop.",
+    ]
+    if NUMPY_IMPORT_ERROR is not None or CV2_IMPORT_ERROR is not None:
+        notes.append("Run scripts/bootstrap_local_dev.sh to enable checkerboard capture, stitching, and robot-frame export.")
+    if importlib.util.find_spec("pyrealsense2") is None:
+        notes.append("RealSense scan and capture actions need pyrealsense2 in the selected Python environment.")
+    if importlib.util.find_spec("farm_ng") is None:
+        notes.append("OAK scan and calibration actions need the editable farm-ng-amiga package installed in the selected Python environment.")
+    return notes
 
 
 def ensure_output_dir() -> None:
@@ -863,6 +907,7 @@ def choose_stitch_root_camera_id(requested_camera_id: str, solved_counts: dict[s
 
 
 def stitch_calibration_session(settings: dict[str, Any]) -> dict[str, Any]:
+    require_calibration_runtime()
     session_gap_minutes = validate_session_gap(settings)
     session_entries = current_session_entries(session_gap_minutes)
     if not session_entries:
@@ -979,6 +1024,7 @@ def validate_anchor_settings(data: dict[str, Any]) -> tuple[str, float, float, f
 
 
 def anchor_stitched_calibration_to_robot_frame(settings: dict[str, Any]) -> dict[str, Any]:
+    require_calibration_runtime()
     anchor_camera_id, camera_x_m, camera_y_m, camera_z_m, roll_deg, pitch_deg, yaw_deg = validate_anchor_settings(settings)
     stitched_path = latest_path("stitched_calibration_*.json")
     if stitched_path is None:
@@ -1155,7 +1201,12 @@ def serialize_rs_intrinsics(intr: Any) -> dict[str, Any]:
 
 
 def scan_realsense_devices() -> list[dict[str, Any]]:
-    import pyrealsense2 as rs
+    try:
+        import pyrealsense2 as rs
+    except ModuleNotFoundError as exc:
+        raise RuntimeError(
+            "RealSense support requires pyrealsense2. Use scripts/bootstrap_local_dev.sh --with-live-hardware if this machine supports it."
+        ) from exc
 
     devices = []
     ctx = rs.context()
@@ -1176,7 +1227,12 @@ def scan_realsense_devices() -> list[dict[str, Any]]:
 
 
 def collect_realsense_intrinsics() -> list[dict[str, Any]]:
-    import pyrealsense2 as rs
+    try:
+        import pyrealsense2 as rs
+    except ModuleNotFoundError as exc:
+        raise RuntimeError(
+            "RealSense support requires pyrealsense2. Use scripts/bootstrap_local_dev.sh --with-live-hardware if this machine supports it."
+        ) from exc
 
     reports = []
     ctx = rs.context()
@@ -1210,7 +1266,12 @@ def collect_realsense_intrinsics() -> list[dict[str, Any]]:
 
 
 def pick_realsense_color_profile(serial: str) -> tuple[int, int, Any, int]:
-    import pyrealsense2 as rs
+    try:
+        import pyrealsense2 as rs
+    except ModuleNotFoundError as exc:
+        raise RuntimeError(
+            "RealSense support requires pyrealsense2. Use scripts/bootstrap_local_dev.sh --with-live-hardware if this machine supports it."
+        ) from exc
 
     ctx = rs.context()
     selected: tuple[int, int, Any, int] | None = None
@@ -1258,7 +1319,13 @@ def capture_realsense_checkerboard(
     pattern_rows: int,
     square_size_m: float,
 ) -> dict[str, Any]:
-    import pyrealsense2 as rs
+    require_calibration_runtime()
+    try:
+        import pyrealsense2 as rs
+    except ModuleNotFoundError as exc:
+        raise RuntimeError(
+            "RealSense support requires pyrealsense2. Use scripts/bootstrap_local_dev.sh --with-live-hardware if this machine supports it."
+        ) from exc
 
     width, height, fmt, fps = pick_realsense_color_profile(serial)
     pipeline = rs.pipeline()
@@ -1401,6 +1468,7 @@ def capture_oak_checkerboard(
     pattern_rows: int,
     square_size_m: float,
 ) -> dict[str, Any]:
+    require_calibration_runtime()
     name, calibration = asyncio.run(request_oak_calibration(config_path))
     _, frame = asyncio.run(request_oak_frame(config_path))
     image = cv2.imdecode(np.frombuffer(frame.image_data, dtype=np.uint8), cv2.IMREAD_COLOR)
@@ -1427,6 +1495,11 @@ def capture_oak_checkerboard(
 
 
 def scan_cameras() -> dict[str, Any]:
+    try:
+        realsense_status = scan_realsense_devices()
+    except Exception as exc:
+        realsense_status = [{"name": "realsense", "online": False, "error": str(exc)}]
+
     oak_status = []
     for path in oak_config_paths():
         try:
@@ -1444,15 +1517,20 @@ def scan_cameras() -> dict[str, Any]:
 
     return {
         "created_at": datetime.now(timezone.utc).isoformat(),
-        "realsense": scan_realsense_devices(),
+        "realsense": realsense_status,
         "oak": oak_status,
     }
 
 
 def pull_factory_intrinsics() -> dict[str, Any]:
+    try:
+        realsense_reports = collect_realsense_intrinsics()
+    except Exception as exc:
+        realsense_reports = [{"name": "realsense", "online": False, "error": str(exc)}]
+
     report = {
         "created_at": datetime.now(timezone.utc).isoformat(),
-        "realsense": collect_realsense_intrinsics(),
+        "realsense": realsense_reports,
         "oak": collect_oak_intrinsics(),
     }
     path = write_json_report("factory_intrinsics", report)
@@ -1461,13 +1539,20 @@ def pull_factory_intrinsics() -> dict[str, Any]:
 
 
 def capture_checkerboard_sample(settings: dict[str, Any]) -> dict[str, Any]:
+    require_calibration_runtime()
     pattern_cols, pattern_rows, square_size_m = validate_board_settings(settings)
     sample_dir = OUTPUT_DIR / f"checkerboard_sample_{utc_stamp()}"
     sample_dir.mkdir(parents=True, exist_ok=True)
 
     captures: list[dict[str, Any]] = []
     errors: list[dict[str, str]] = []
-    for device in scan_realsense_devices():
+    try:
+        realsense_devices = scan_realsense_devices()
+    except Exception as exc:
+        errors.append({"camera_id": "realsense", "error": str(exc)})
+        realsense_devices = []
+
+    for device in realsense_devices:
         serial = str(device["serial"])
         try:
             captures.append(capture_realsense_checkerboard(serial, sample_dir, pattern_cols, pattern_rows, square_size_m))
@@ -1561,6 +1646,7 @@ class Handler(BaseHTTPRequestHandler):
                     "latest_robot_frame": latest_file("robot_frame_calibration_*.json"),
                     "latest_sample_summary": latest_sample_summary(),
                     "camera_status": camera_history_status(),
+                    "notes": local_status_notes(),
                 }
             )
             return
