@@ -1,0 +1,82 @@
+# Curated repo: track reproducible project code, not the Amiga user home.
+
+# Machine-local state and secrets
+/.codex/
+/.cache/
+/.config/
+/.copilot/
+/.dotnet/
+/.hunter/
+/.local/
+/.nv/
+/.ssh/
+/.vscode-server/
+/Desktop/
+/persistent/
+/.bash_history
+/.bash_logout
+/.bashrc
+/.gitconfig
+/.profile
+/.sudo_as_admin_successful
+/.viminfo
+/.wget-hsts
+/.xsessionrc
+/source
+
+# Logs and transient runtime files
+*.log
+*.pid
+*.fifo
+/capture_images.log
+/farm_ng_log.log
+/farmng_log.log
+/farmng_lol.log
+/full_service_app/runtime/
+
+# Build outputs, caches, and virtual environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+.venv/
+venv/
+env/
+ENV/
+
+# Generated media and runtime capture data
+/oak_videos/
+/oak_photos/
+/calibration_data/
+
+# Track curated calibration examples separately
+!/sample_data/
+!/sample_data/calibration/
+!/sample_data/calibration/**
+
+# Excluded vendor/source trees not required by the current app stack
+/depthai-core/
+/librealsense/
+
+# farm-ng workspace internals
+/farm-ng-amiga/.venv/
+/farm-ng-amiga/.vscode/
+/farm-ng-amiga/BYU_Amiga/amiga-env/
+/farm-ng-amiga/BYU_Amiga/**/__pycache__/
+/farm-ng-amiga/BYU_Amiga/field2025/captures/
+/farm-ng-amiga/BYU_Amiga/field2025/.py
+/farm-ng-amiga/BYU_Amiga/field2025/*.csv
+/farm-ng-amiga/BYU_Amiga/cart2026/video_capture_rs/source
+/farm-ng-amiga/BYU_Amiga/cart2026/video_capture_rs/realsense_recording_*/
+/farm-ng-amiga/BYU_Amiga/amiga_YOLO/**/*.pt
+/farm-ng-amiga/BYU_Amiga/amiga_YOLO/**/*.whl
+/farm-ng-amiga/BYU_Amiga/amiga_YOLO/amiga_YOLO_benchmark/test_images/
+/farm-ng-amiga/py/examples/captured_images/
+
+# Editor / OS noise inside tracked trees
+.DS_Store
+Thumbs.db

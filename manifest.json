@@ -1,0 +1,35 @@
+{
+  "services": {
+    "Bash-test": {
+      "name": "Bash-test",
+      "type": "app",
+      "display_name": "Full Service",
+      "exec_cmd": "/mnt/managed_home/farm-ng-user-byu-crimson/scripts/run_full_service_app.sh",
+      "autostart": false,
+      "app_route": "8056"
+    },
+    "full-service-runner": {
+      "name": "full-service-runner",
+      "type": "service",
+      "display_name": "Full Service Runner",
+      "exec_cmd": "/mnt/managed_home/farm-ng-user-byu-crimson/scripts/test_script.sh",
+      "autostart": false
+    },
+    "hangman": {
+      "name": "hangman",
+      "type": "app",
+      "display_name": "Hangman",
+      "exec_cmd": "/mnt/managed_home/farm-ng-user-byu-crimson/scripts/run_hangman_app.sh",
+      "autostart": false,
+      "app_route": "8055"
+    },
+    "full-calibration": {
+      "name": "full-calibration",
+      "type": "app",
+      "display_name": "Full Calibration",
+      "exec_cmd": "/mnt/managed_home/farm-ng-user-byu-crimson/scripts/run_full_calibration_app.sh",
+      "autostart": false,
+      "app_route": "8057"
+    }
+  }
+}

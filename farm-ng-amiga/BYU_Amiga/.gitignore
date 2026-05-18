@@ -1,0 +1,6 @@
+**/amiga-env/
+*.png
+*.jpg
+*.csv
+*_pycache__/
+*captures/

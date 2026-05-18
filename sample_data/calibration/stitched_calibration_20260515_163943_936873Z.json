@@ -1,0 +1,635 @@
+{
+  "created_at": "2026-05-15T16:39:43.935239+00:00",
+  "root_camera_id": "realsense:335122272680",
+  "session": {
+    "session_gap_minutes": 15.0,
+    "sample_count": 14,
+    "sample_names": [
+      "checkerboard_sample_20260515_161809_026786Z",
+      "checkerboard_sample_20260515_161927_369786Z",
+      "checkerboard_sample_20260515_162043_529915Z",
+      "checkerboard_sample_20260515_162213_146873Z",
+      "checkerboard_sample_20260515_162354_934493Z",
+      "checkerboard_sample_20260515_162510_001559Z",
+      "checkerboard_sample_20260515_162612_317853Z",
+      "checkerboard_sample_20260515_162720_057565Z",
+      "checkerboard_sample_20260515_162946_626942Z",
+      "checkerboard_sample_20260515_163218_081431Z",
+      "checkerboard_sample_20260515_163449_085024Z",
+      "checkerboard_sample_20260515_163547_043796Z",
+      "checkerboard_sample_20260515_163713_358119Z",
+      "checkerboard_sample_20260515_163835_952513Z"
+    ],
+    "sample_report_paths": [
+      "sample_data/calibration/checkerboard_sample_20260515_161809_026786Z/sample_report.json",
+      "sample_data/calibration/checkerboard_sample_20260515_161927_369786Z/sample_report.json",
+      "sample_data/calibration/checkerboard_sample_20260515_162043_529915Z/sample_report.json",
+      "sample_data/calibration/checkerboard_sample_20260515_162213_146873Z/sample_report.json",
+      "sample_data/calibration/checkerboard_sample_20260515_162354_934493Z/sample_report.json",
+      "sample_data/calibration/checkerboard_sample_20260515_162510_001559Z/sample_report.json",
+      "sample_data/calibration/checkerboard_sample_20260515_162612_317853Z/sample_report.json",
+      "sample_data/calibration/checkerboard_sample_20260515_162720_057565Z/sample_report.json",
+      "sample_data/calibration/checkerboard_sample_20260515_162946_626942Z/sample_report.json",
+      "sample_data/calibration/checkerboard_sample_20260515_163218_081431Z/sample_report.json",
+      "sample_data/calibration/checkerboard_sample_20260515_163449_085024Z/sample_report.json",
+      "sample_data/calibration/checkerboard_sample_20260515_163547_043796Z/sample_report.json",
+      "sample_data/calibration/checkerboard_sample_20260515_163713_358119Z/sample_report.json",
+      "sample_data/calibration/checkerboard_sample_20260515_163835_952513Z/sample_report.json"
+    ],
+    "oldest_sample_at": "2026-05-15T16:18:42.357660+00:00",
+    "newest_sample_at": "2026-05-15T16:39:08.577821+00:00",
+    "expected_camera_ids": [
+      "oak:oak0",
+      "oak:oak1",
+      "realsense:211622067750",
+      "realsense:217222062474",
+      "realsense:323622273079",
+      "realsense:323622273314",
+      "realsense:335122272680"
+    ],
+    "fresh_camera_ids": [
+      "oak:oak0",
+      "oak:oak1",
+      "realsense:211622067750",
+      "realsense:217222062474",
+      "realsense:323622273079",
+      "realsense:323622273314",
+      "realsense:335122272680"
+    ],
+    "missing_fresh_camera_ids": [],
+    "unstitched_fresh_camera_ids": []
+  },
+  "sample_summaries": [
+    {
+      "sample_name": "checkerboard_sample_20260515_161809_026786Z",
+      "created_at": "2026-05-15T16:18:42.357660+00:00",
+      "report_path": "sample_data/calibration/checkerboard_sample_20260515_161809_026786Z/sample_report.json",
+      "solved_camera_ids": [
+        "oak:oak0",
+        "oak:oak1",
+        "realsense:323622273079",
+        "realsense:335122272680"
+      ]
+    },
+    {
+      "sample_name": "checkerboard_sample_20260515_161927_369786Z",
+      "created_at": "2026-05-15T16:19:57.913969+00:00",
+      "report_path": "sample_data/calibration/checkerboard_sample_20260515_161927_369786Z/sample_report.json",
+      "solved_camera_ids": [
+        "realsense:323622273314",
+        "realsense:335122272680"
+      ]
+    },
+    {
+      "sample_name": "checkerboard_sample_20260515_162043_529915Z",
+      "created_at": "2026-05-15T16:21:17.174594+00:00",
+      "report_path": "sample_data/calibration/checkerboard_sample_20260515_162043_529915Z/sample_report.json",
+      "solved_camera_ids": [
+        "realsense:323622273314",
+        "realsense:335122272680"
+      ]
+    },
+    {
+      "sample_name": "checkerboard_sample_20260515_162213_146873Z",
+      "created_at": "2026-05-15T16:22:46.890840+00:00",
+      "report_path": "sample_data/calibration/checkerboard_sample_20260515_162213_146873Z/sample_report.json",
+      "solved_camera_ids": [
+        "oak:oak0",
+        "oak:oak1",
+        "realsense:323622273314",
+        "realsense:335122272680"
+      ]
+    },
+    {
+      "sample_name": "checkerboard_sample_20260515_162354_934493Z",
+      "created_at": "2026-05-15T16:24:29.199009+00:00",
+      "report_path": "sample_data/calibration/checkerboard_sample_20260515_162354_934493Z/sample_report.json",
+      "solved_camera_ids": [
+        "oak:oak0",
+        "realsense:323622273079",
+        "realsense:335122272680"
+      ]
+    },
+    {
+      "sample_name": "checkerboard_sample_20260515_162510_001559Z",
+      "created_at": "2026-05-15T16:25:47.047312+00:00",
+      "report_path": "sample_data/calibration/checkerboard_sample_20260515_162510_001559Z/sample_report.json",
+      "solved_camera_ids": [
+        "oak:oak0",
+        "oak:oak1",
+        "realsense:323622273079",
+        "realsense:335122272680"
+      ]
+    },
+    {
+      "sample_name": "checkerboard_sample_20260515_162612_317853Z",
+      "created_at": "2026-05-15T16:26:48.176458+00:00",
+      "report_path": "sample_data/calibration/checkerboard_sample_20260515_162612_317853Z/sample_report.json",
+      "solved_camera_ids": [
+        "oak:oak0",
+        "oak:oak1",
+        "realsense:323622273314",
+        "realsense:335122272680"
+      ]
+    },
+    {
+      "sample_name": "checkerboard_sample_20260515_162720_057565Z",
+      "created_at": "2026-05-15T16:27:54.632902+00:00",
+      "report_path": "sample_data/calibration/checkerboard_sample_20260515_162720_057565Z/sample_report.json",
+      "solved_camera_ids": [
+        "oak:oak0",
+        "oak:oak1",
+        "realsense:323622273314",
+        "realsense:335122272680"
+      ]
+    },
+    {
+      "sample_name": "checkerboard_sample_20260515_162946_626942Z",
+      "created_at": "2026-05-15T16:30:20.425245+00:00",
+      "report_path": "sample_data/calibration/checkerboard_sample_20260515_162946_626942Z/sample_report.json",
+      "solved_camera_ids": [
+        "oak:oak0",
+        "realsense:323622273314"
+      ]
+    },
+    {
+      "sample_name": "checkerboard_sample_20260515_163218_081431Z",
+      "created_at": "2026-05-15T16:32:52.717410+00:00",
+      "report_path": "sample_data/calibration/checkerboard_sample_20260515_163218_081431Z/sample_report.json",
+      "solved_camera_ids": [
+        "oak:oak0",
+        "oak:oak1",
+        "realsense:323622273314",
+        "realsense:335122272680"
+      ]
+    },
+    {
+      "sample_name": "checkerboard_sample_20260515_163449_085024Z",
+      "created_at": "2026-05-15T16:35:19.485266+00:00",
+      "report_path": "sample_data/calibration/checkerboard_sample_20260515_163449_085024Z/sample_report.json",
+      "solved_camera_ids": [
+        "oak:oak0",
+        "oak:oak1",
+        "realsense:323622273314",
+        "realsense:335122272680"
+      ]
+    },
+    {
+      "sample_name": "checkerboard_sample_20260515_163547_043796Z",
+      "created_at": "2026-05-15T16:36:16.585266+00:00",
+      "report_path": "sample_data/calibration/checkerboard_sample_20260515_163547_043796Z/sample_report.json",
+      "solved_camera_ids": [
+        "realsense:323622273314",
+        "realsense:335122272680"
+      ]
+    },
+    {
+      "sample_name": "checkerboard_sample_20260515_163713_358119Z",
+      "created_at": "2026-05-15T16:37:44.376506+00:00",
+      "report_path": "sample_data/calibration/checkerboard_sample_20260515_163713_358119Z/sample_report.json",
+      "solved_camera_ids": [
+        "oak:oak0",
+        "realsense:323622273314",
+        "realsense:335122272680"
+      ]
+    },
+    {
+      "sample_name": "checkerboard_sample_20260515_163835_952513Z",
+      "created_at": "2026-05-15T16:39:08.577821+00:00",
+      "report_path": "sample_data/calibration/checkerboard_sample_20260515_163835_952513Z/sample_report.json",
+      "solved_camera_ids": [
+        "oak:oak0",
+        "realsense:211622067750",
+        "realsense:217222062474",
+        "realsense:323622273079",
+        "realsense:323622273314",
+        "realsense:335122272680"
+      ]
+    }
+  ],
+  "root_T_cameras": {
+    "oak:oak0": {
+      "matrix_4x4": [
+        [
+          0.963458121442336,
+          0.04416042570761787,
+          -0.264193688471408,
+          -0.0018831701226465908
+        ],
+        [
+          0.15373252469800466,
+          0.7165349875037664,
+          0.6803998254945068,
+          -0.23312971398010612
+        ],
+        [
+          0.21935076721266053,
+          -0.6961519004386182,
+          0.6835625592723155,
+          0.27297519215554766
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "rotation_matrix": [
+        [
+          0.963458121442336,
+          0.04416042570761787,
+          -0.264193688471408
+        ],
+        [
+          0.15373252469800466,
+          0.7165349875037664,
+          0.6803998254945068
+        ],
+        [
+          0.21935076721266053,
+          -0.6961519004386182,
+          0.6835625592723155
+        ]
+      ],
+      "rotation_vector": [
+        -0.7720542668635192,
+        -0.27120125832977204,
+        0.0614547241204286
+      ],
+      "translation_m": [
+        -0.0018831701226465908,
+        -0.23312971398010612,
+        0.27297519215554766
+      ]
+    },
+    "oak:oak1": {
+      "matrix_4x4": [
+        [
+          0.9982294384321374,
+          0.031207342126648767,
+          0.0506368447363214,
+          -0.021933684618742233
+        ],
+        [
+          -0.056531878977493615,
+          0.7624983351279667,
+          0.6445156596905568,
+          -0.19518193272122591
+        ],
+        [
+          -0.018496889109632493,
+          -0.6462371010120587,
+          0.7629124945685426,
+          0.22635431412579032
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "rotation_matrix": [
+        [
+          0.9982294384321374,
+          0.031207342126648767,
+          0.0506368447363214
+        ],
+        [
+          -0.056531878977493615,
+          0.7624983351279667,
+          0.6445156596905568
+        ],
+        [
+          -0.018496889109632493,
+          -0.6462371010120587,
+          0.7629124945685426
+        ]
+      ],
+      "rotation_vector": [
+        -0.702053995424638,
+        0.03760256459862639,
+        -0.04772228470623488
+      ],
+      "translation_m": [
+        -0.021933684618742233,
+        -0.19518193272122591,
+        0.22635431412579032
+      ]
+    },
+    "realsense:211622067750": {
+      "matrix_4x4": [
+        [
+          0.9998330006537433,
+          0.011393674149423421,
+          0.014288281670961583,
+          0.05302089864427546
+        ],
+        [
+          -0.018215254020898675,
+          0.6844244117610752,
+          0.7288562472164595,
+          -0.5128858909238039
+        ],
+        [
+          -0.0014748981951684722,
+          -0.7289947933798179,
+          0.6845176520006119,
+          0.1773494733020962
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "rotation_matrix": [
+        [
+          0.9998330006537433,
+          0.011393674149423421,
+          0.014288281670961583
+        ],
+        [
+          -0.018215254020898675,
+          0.6844244117610752,
+          0.7288562472164595
+        ],
+        [
+          -0.0014748981951684722,
+          -0.7289947933798179,
+          0.6845176520006119
+        ]
+      ],
+      "rotation_vector": [
+        -0.8168167848034339,
+        0.008831924207609235,
+        -0.01658953407178442
+      ],
+      "translation_m": [
+        0.05302089864427546,
+        -0.5128858909238039,
+        0.1773494733020962
+      ]
+    },
+    "realsense:217222062474": {
+      "matrix_4x4": [
+        [
+          0.9991805407962515,
+          0.007698227388877176,
+          -0.039736434026970704,
+          -0.13668829677911856
+        ],
+        [
+          0.024401964275038213,
+          0.6686915945240489,
+          0.743139351368507,
+          -0.5147431419370544
+        ],
+        [
+          0.03229227513865218,
+          -0.7435000260309038,
+          0.6679557771727223,
+          0.17617550000147592
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "rotation_matrix": [
+        [
+          0.9991805407962515,
+          0.007698227388877176,
+          -0.039736434026970704
+        ],
+        [
+          0.024401964275038213,
+          0.6686915945240489,
+          0.743139351368507
+        ],
+        [
+          0.03229227513865218,
+          -0.7435000260309038,
+          0.6679557771727223
+        ]
+      ],
+      "rotation_vector": [
+        -0.8383577123376406,
+        -0.04061901275907154,
+        0.009419706524839009
+      ],
+      "translation_m": [
+        -0.13668829677911856,
+        -0.5147431419370544,
+        0.17617550000147592
+      ]
+    },
+    "realsense:323622273079": {
+      "matrix_4x4": [
+        [
+          -0.9997364128787892,
+          -0.0218914703733333,
+          0.0069186912884276796,
+          -0.31946063135345754
+        ],
+        [
+          0.0003568941053145021,
+          0.2864981080884497,
+          0.9580807412156539,
+          -0.5240724079896616
+        ],
+        [
+          -0.0229559881261663,
+          0.9578306727113266,
+          -0.28641477794017356,
+          0.699391339367844
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "rotation_matrix": [
+        [
+          -0.9997364128787892,
+          -0.0218914703733333,
+          0.0069186912884276796
+        ],
+        [
+          0.0003568941053145021,
+          0.2864981080884497,
+          0.9580807412156539
+        ],
+        [
+          -0.0229559881261663,
+          0.9578306727113266,
+          -0.28641477794017356
+        ]
+      ],
+      "rotation_vector": [
+        -0.02096535517065472,
+        2.5046467415850713,
+        1.865268337233456
+      ],
+      "translation_m": [
+        -0.31946063135345754,
+        -0.5240724079896616,
+        0.699391339367844
+      ]
+    },
+    "realsense:323622273314": {
+      "matrix_4x4": [
+        [
+          -0.9994840443986726,
+          -0.03120561795666748,
+          -0.007606208018129687,
+          0.1820920096420484
+        ],
+        [
+          -0.016864074254551033,
+          0.30830399358055893,
+          0.9511383971545969,
+          -0.5175470483452691
+        ],
+        [
+          -0.02733583713752956,
+          0.9507759236277606,
+          -0.30867117626653984,
+          0.7082470891926815
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "rotation_matrix": [
+        [
+          -0.9994840443986726,
+          -0.03120561795666748,
+          -0.007606208018129687
+        ],
+        [
+          -0.016864074254551033,
+          0.30830399358055893,
+          0.9511383971545969
+        ],
+        [
+          -0.02733583713752956,
+          0.9507759236277606,
+          -0.30867117626653984
+        ]
+      ],
+      "rotation_vector": [
+        -0.04649999084880561,
+        2.531019524404671,
+        1.8398078798383257
+      ],
+      "translation_m": [
+        0.1820920096420484,
+        -0.5175470483452691,
+        0.7082470891926815
+      ]
+    },
+    "realsense:335122272680": {
+      "matrix_4x4": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "rotation_matrix": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "rotation_vector": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "translation_m": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "graph_edges_used": {
+    "realsense:323622273079": {
+      "from_camera_id": "realsense:335122272680",
+      "sample_name": "checkerboard_sample_20260515_163835_952513Z",
+      "created_at": "2026-05-15T16:39:08.577821+00:00"
+    },
+    "oak:oak0": {
+      "from_camera_id": "realsense:335122272680",
+      "sample_name": "checkerboard_sample_20260515_163835_952513Z",
+      "created_at": "2026-05-15T16:39:08.577821+00:00"
+    },
+    "oak:oak1": {
+      "from_camera_id": "realsense:335122272680",
+      "sample_name": "checkerboard_sample_20260515_163449_085024Z",
+      "created_at": "2026-05-15T16:35:19.485266+00:00"
+    },
+    "realsense:323622273314": {
+      "from_camera_id": "realsense:335122272680",
+      "sample_name": "checkerboard_sample_20260515_163835_952513Z",
+      "created_at": "2026-05-15T16:39:08.577821+00:00"
+    },
+    "realsense:217222062474": {
+      "from_camera_id": "realsense:335122272680",
+      "sample_name": "checkerboard_sample_20260515_163835_952513Z",
+      "created_at": "2026-05-15T16:39:08.577821+00:00"
+    },
+    "realsense:211622067750": {
+      "from_camera_id": "realsense:335122272680",
+      "sample_name": "checkerboard_sample_20260515_163835_952513Z",
+      "created_at": "2026-05-15T16:39:08.577821+00:00"
+    }
+  },
+  "notes": [
+    "root_T_cameras maps each camera frame into the selected root camera frame.",
+    "Only sample reports from the newest contiguous session are stitched together.",
+    "Missing fresh cameras were not solved successfully in the current session.",
+    "Unstitched fresh cameras had successful solves but no overlap path into the selected root camera graph."
+  ]
+}
